@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>VUEJS 實戰 - 5倍商城</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/blog-home.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- Page Content -->
+<div id="cart-app" class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="page-header">VUEJS 實戰 -
+                <small>5倍商城</small>
+            </h1>
+
+            <div class="item" v-for="(item, idx) in filteredItems.slice(pageStart,pageStart + countOfPage)">
+                <h2>{{item.index}}  {{item.imageType}} : {{item.name}}</h2>
+                <img class="item-img img-responsive" :src="item.picture" :alt="item.name">
+                <p>{{item.info}}</p>
+                <p class="item-price ">$ {{item.price}} </p>
+                <a class="btn btn-primary " @click.prevent="addItem(item.index)" href="#">放入購物車
+                    <span class="glyphicon glyphicon-chevron-right "></span>
+                </a>
+            </div>
+
+
+            <hr>
+
+            <!--Pager -->
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true" @click.prevent="setPage(currPage-1)">&laquo;</span>
+                    </a>
+                </li>
+                <li v-for="n in totalPage"
+                    :class="{'active': (currPage === (n)) }">
+                    <a href="#" @click.prevent="setPage(n)">{{n}}</a>
+                </li>
+
+                <li>
+                    <a href="#" @click.prevent="setPage(currPage+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4 ">
+
+            <div class="well ">
+                <h4>商品搜尋</h4>
+                <div class="input-group ">
+                    <input v-model="searchName" type="text" class="form-control">
+                    <span class="input-group-btn">
+                <button class="btn btn-default"><span class="glyphicon glyphicon-search "></span></button>
+            </span>
+                </div>
+                <!-- /.input-group -->
+            </div>
+
+            <hr>
+
+            <div class="well cart">
+                <h4>購物車</h4>
+
+                <ul class="itemsInCart ">
+                    <li v-for="item in carts">
+                        <div class="cart-item">
+                            <div class="cart-title">{{item.name}}</div>
+                            <span class="price">$ {{item.price}}</span> x
+                            <span class="count">{{item.qty}}</span>
+                            <div class="handler">
+                                <a href="#" @click.prevent="add(item)" class="cart-btn plus">+</a>
+                                <a href="#" @click.prevent="remove(item)" class="cart-btn minus">-</a>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <hr>
+                <p>小計： <span>$ {{total}}</span></p>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="js/shopCarts.js"></script>
+</body>
+
+</html>
