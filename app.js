@@ -10,21 +10,24 @@ app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'ejs');
 
 //sass 的設定
-app.use('/css', sass({
-    src: path.join(__dirname, 'public/sass'), //scss 檔案的位置
-    dest: path.join(__dirname, 'public/css'), //輸出的位置
-    debug: true,
-    outputStlyes: 'expanded'
-}));
+// app.use('/css', sass({
+//     src: path.join(__dirname, 'public/sass'), //scss 檔案的位置
+//     dest: path.join(__dirname, 'public/css'), //輸出的位置
+//     debug: true,
+//     outputStlyes: 'expanded'
+// }));
 
 //靜態檔案和middleware的路徑設定
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//roters 的設定
+//routers 的設定
 app.get('/', function(req, res){
 	res.render('index');
+});
+app.get('/home', function(req, res){
+   res.render('home');
 });
 
 app.listen(port);

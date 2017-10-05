@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>VUEJS 實戰 - 5倍商城</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/blog-home.css" rel="stylesheet">
+    <% include template.ejs %>
+</head>
+<body>
+    <!-- Page Content -->
+    <div id="cart-app" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="page-header">VUEJS 實戰 -
+                    <small>5倍商城</small>
+                </h1>
+                <product-component :sort-pro="sortProduct" :start-pro="startProduct" :count-pro="countOfProduct"></product-component>
+                <hr>
+                <!--Pager -->
+                <pager-component :current-pg="currentPage" :total-pg="totalPage"></pager-component>
+            </div>
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4 ">
+                <search-component :search-term="searchTerms"></search-component>
+                <hr>
+                <cart-component></cart-component>
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <script src="https://unpkg.com/vue@2.3.4/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>
